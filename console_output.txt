@@ -1,0 +1,131 @@
+ *  Executing task: platformio device monitor 
+
+
+Please build project in debug configuration to get more details about an exception.
+See https://docs.platformio.org/page/projectconf/build_configurations.html
+
+
+--- Terminal on /dev/cu.usbserial-0001 | 115200 8-N-1
+--- Available filters and text transformations: colorize, debug, default, direct, esp32_exception_decoder, hexlify, log2file, nocontrol, printable, send_on_enter, time
+--- More details at https://bit.ly/pio-monitor-filters
+--- Quit: Ctrl+C | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H
+ESP32 Partition table:
++ ---- | --- | -------- | -------- | ---------------- +
+| Type | Sub |  Offset  |   Size   |       Label      |
+| ---- | --- | -------- | -------- | ---------------- |
+|  01  | 02  | 0x009000 | 0x005000 | nvs              |
+|  01  | 00  | 0x00E000 | 0x002000 | otadata          |
+|  00  | 10  | 0x010000 | 0x140000 | app0             |
+|  00  | 11  | 0x150000 | 0x140000 | app1             |
+|  01  | 82  | 0x290000 | 0x160000 | spiffs           |
+|  01  | 03  | 0x3F0000 | 0x010000 | coredump         |
++ ---- | --- | -------- | -------- | ---------------- +
+Active partition app0 ELF file SHA256: 87b66f25e3d8aabc IDF version: 4.4.6
+
+This chip with 2 CPU cores, WiFi/BT/BLE, silicon revision 1, 
+ press C to cause crash
+
+assert failed: void crash_me_hard() main.cpp:50 (0)
+
+
+Backtrace: 0x400824b6:0x3ffb9d30 0x40086dcd:0x3ffb9d50 0x4008c255:0x3ffb9d70 0x400d19ea:0x3ffb9e90 0x400d1a6f:0x3ffb9eb0 0x400d1a83:0x3ffb9ed0 0x400d9a55:0x3ffb9ef0 0x40089d01:0x3ffb9f10
+
+  #0  0x400824b6:0x3ffb9d30 in panic_abort at /Users/matt/.platformio/packages/framework-espidf@3.40406.240122/components/esp_system/panic.c:408
+  #1  0x40086dcd:0x3ffb9d50 in esp_system_abort at /Users/matt/.platformio/packages/framework-espidf@3.40406.240122/components/esp_system/esp_system.c:137
+  #2  0x4008c255:0x3ffb9d70 in __assert_func at /Users/matt/.platformio/packages/framework-espidf@3.40406.240122/components/newlib/assert.c:85
+  #3  0x400d19ea:0x3ffb9e90 in crash_me_hard() at src/main.cpp:50
+  #4  0x400d1a6f:0x3ffb9eb0 in processSerial() at src/main.cpp:57
+  #5  0x400d1a83:0x3ffb9ed0 in loop() at src/main.cpp:75 (discriminator 1)
+  #6  0x400d9a55:0x3ffb9ef0 in loopTask(void*) at /Users/matt/.platformio/packages/framework-arduinoespressif32/cores/esp32/main.cpp:50
+  #7  0x40089d01:0x3ffb9f10 in vPortTaskWrapper at /Users/matt/.platformio/packages/framework-espidf@3.40406.240122/components/freertos/port/xtensa/port.c:142
+
+
+
+
+ELF file SHA256: 87b66f25e3d8aabc
+
+I (8709) esp_core_dump_flash: Save core dump to flash...
+I (8715) esp_core_dump_flash: Erase flash 12288 bytes @ 0x3f0000
+I (8860) esp_core_dump_flash: Write end offset 0x24e4, check sum length 4
+I (8860) esp_core_dump_flash: Core dump has been saved to flash.
+Rebooting...
+ets Jun  8 2016 00:22:57
+
+rst:0xc (SW_CPU_RESET),boot:0x17 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6652
+ho 0 tail 12 room 4
+load:0x40078000,len:15060
+load:0x40080400,len:3836
+entry 0x4008069c
+I (31) boot: ESP-IDF 4.4.6 2nd stage bootloader
+I (31) boot: compile time 17:23:09
+I (31) boot: Multicore bootloader
+I (34) boot: chip revision: v1.0
+I (38) boot.esp32: SPI Speed      : 40MHz
+I (43) boot.esp32: SPI Mode       : DIO
+I (47) boot.esp32: SPI Flash Size : 4MB
+I (52) boot: Enabling RNG early entropy source...
+I (57) boot: Partition Table:
+I (61) boot: ## Label            Usage          Type ST Offset   Length
+I (68) boot:  0 nvs              WiFi data        01 02 00009000 00005000
+I (75) boot:  1 otadata          OTA data         01 00 0000e000 00002000
+I (83) boot:  2 app0             OTA app          00 10 00010000 00140000
+I (90) boot:  3 app1             OTA app          00 11 00150000 00140000
+I (98) boot:  4 spiffs           Unknown data     01 82 00290000 00160000
+I (105) boot:  5 coredump         Unknown data     01 03 003f0000 00010000
+I (113) boot: End of partition table
+I (117) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=0dfe8h ( 57320) map
+I (146) esp_image: segment 1: paddr=0001e010 vaddr=3ffb0000 size=02008h (  8200) load
+I (150) esp_image: segment 2: paddr=00020020 vaddr=400d0020 size=298c4h (170180) map
+I (214) esp_image: segment 3: paddr=000498ec vaddr=3ffb2008 size=014dch (  5340) load
+I (216) esp_image: segment 4: paddr=0004add0 vaddr=40080000 size=0d514h ( 54548) load
+I (249) boot: Loaded app from partition at offset 0x10000
+I (249) boot: Disabling RNG early entropy source...
+I (260) cpu_start: Multicore app
+I (260) cpu_start: Pro cpu up.
+I (261) cpu_start: Starting app cpu, entry point is 0x40081ad0
+I (242) cpu_start: App cpu up.
+I (279) cpu_start: Pro cpu start user code
+I (279) cpu_start: cpu freq: 160000000
+I (279) cpu_start: Application information:
+I (283) cpu_start: Project name:     ESP32-CrashTest
+I (289) cpu_start: App version:      ff89364-dirty
+I (294) cpu_start: Compile time:     May  3 2024 17:22:15
+I (301) cpu_start: ELF file SHA256:  87b66f25e3d8aabc...
+I (307) cpu_start: ESP-IDF:          4.4.6
+I (311) cpu_start: Min chip rev:     v0.0
+I (316) cpu_start: Max chip rev:     v3.99 
+I (321) cpu_start: Chip rev:         v1.0
+I (326) heap_init: Initializing. RAM available for dynamic allocation:
+I (333) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM
+I (339) heap_init: At 3FFB4358 len 0002BCA8 (175 KiB): DRAM
+I (345) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM
+I (351) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM
+I (358) heap_init: At 4008D514 len 00012AEC (74 KiB): IRAM
+I (365) spi_flash: detected chip: winbond
+I (369) spi_flash: flash io: dio
+I (374) esp_core_dump_flash: Init core dump to flash
+I (379) esp_core_dump_flash: Found partition 'coredump' @ 3f0000 65536 bytes
+I (398) esp_core_dump_flash: Core dump data checksum is correct
+I (398) esp_core_dump_flash: Found core dump 9444 bytes in flash @ 0x3f0000
+I (403) cpu_start: Starting scheduler on PRO CPU.
+I (0) cpu_start: Starting scheduler on APP CPU.
+ESP32 Partition table:
++ ---- | --- | -------- | -------- | ---------------- +
+| Type | Sub |  Offset  |   Size   |       Label      |
+| ---- | --- | -------- | -------- | ---------------- |
+|  01  | 02  | 0x009000 | 0x005000 | nvs              |
+|  01  | 00  | 0x00E000 | 0x002000 | otadata          |
+|  00  | 10  | 0x010000 | 0x140000 | app0             |
+|  00  | 11  | 0x150000 | 0x140000 | app1             |
+|  01  | 82  | 0x290000 | 0x160000 | spiffs           |
+|  01  | 03  | 0x3F0000 | 0x010000 | coredump         |
++ ---- | --- | -------- | -------- | ---------------- +
+Active partition app0 ELF file SHA256: 87b66f25e3d8aabc IDF version: 4.4.6
+
+This chip with 2 CPU cores, WiFi/BT/BLE, silicon revision 1, 
+ press C to cause crash
+ 
